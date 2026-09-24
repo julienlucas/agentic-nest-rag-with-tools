@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Container, Eyebrow } from "@/components/site/primitives";
 import { DemoChat } from "@/components/rag/DemoChat";
 
-type Vendor = "bedrock" | "mistral";
+type Vendor = "bedrock" | "mistral" | "cohere";
 
 /*
  * Le flow n'est plus un arc-en-ciel d'icônes : les six étapes partagent le même
@@ -27,10 +27,10 @@ const steps: {
 }[] = [
   { icon: <ScanText />, label: "OCR", model: "Mistral OCR", vendor: "mistral" },
   { icon: <Search />, label: "Recherche hybride", model: "Cohere Embed · Bedrock", vendor: "bedrock" },
-  { icon: <ArrowDownUp />, label: "Reranking", model: "Cohere Rerank 3.5 · Bedrock", vendor: "bedrock" },
-  { icon: <ShieldCheck />, label: "Vérification de pertinence", model: "Petit modèle · Bedrock", vendor: "bedrock" },
-  { icon: <Redo2 />, label: "Recherche à outils", model: "Vercel AI SDK · Bedrock", vendor: "bedrock" },
-  { icon: <Sparkles />, label: "Réponse sourcée", model: "Mistral Large · Bedrock", vendor: "bedrock", accent: true },
+  { icon: <ArrowDownUp />, label: "Reranking", model: "Cohere Rerank v4 Pro", vendor: "cohere" },
+  { icon: <ShieldCheck />, label: "Vérification de pertinence", model: "Claude Haiku 4.5 · Bedrock", vendor: "bedrock" },
+  { icon: <Redo2 />, label: "Recherche à outils", model: "Claude Sonnet 4.6 · Bedrock", vendor: "bedrock" },
+  { icon: <Sparkles />, label: "Réponse sourcée", model: "Claude Sonnet 4.6 · Bedrock", vendor: "bedrock", accent: true },
 ];
 
 const tooling = [

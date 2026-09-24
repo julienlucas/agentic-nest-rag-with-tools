@@ -19,7 +19,7 @@ export const pipelineSteps: PipelineStep[] = [
     label: "Routage & réécriture",
     detail:
       "Cible le document visé par la question (correspondance sur le nom, puis petit modèle si besoin).",
-    model: "small · bedrock",
+    model: "claude-haiku-4.5",
     ms: 1400,
   },
   {
@@ -32,16 +32,16 @@ export const pipelineSteps: PipelineStep[] = [
   },
   {
     key: "rerank",
-    label: "Reranking Cohere (Bedrock)",
-    detail: "cohere.rerank-v3-5 via Bedrock sur ≤ 40 candidats → 30 passages scorés.",
-    model: "cohere rerank-3.5",
+    label: "Reranking Cohere",
+    detail: "rerank-v4.0-pro (API Cohere) sur ≤ 40 candidats → 30 passages scorés.",
+    model: "cohere rerank-v4",
     ms: 1600,
   },
   {
     key: "check",
     label: "Agent vérificateur de pertinence",
     detail: "Classe les 3 meilleurs passages : CAN_ANSWER, PARTIAL ou NO_MATCH — signal affiché dans le rapport.",
-    model: "small · bedrock",
+    model: "claude-haiku-4.5",
     ms: 2200,
   },
   {
@@ -49,7 +49,7 @@ export const pipelineSteps: PipelineStep[] = [
     label: "Recherche à outils",
     detail:
       "Si le contexte ne suffit pas, le modèle enchaîne search / grep / read_page (5 appels max) ; chaque passage ramené est numéroté et s'ajoute après les 10 initiaux.",
-    model: "large · bedrock",
+    model: "claude-sonnet-4.6",
     conditional: true,
     ms: 0,
   },
@@ -58,7 +58,7 @@ export const pipelineSteps: PipelineStep[] = [
     label: "Agent de recherche et de réponse",
     detail:
       "Reçoit les 10 meilleurs passages et les outils, rédige la réponse avec citations [n] — refuse explicitement si la preuve est absente.",
-    model: "large · bedrock",
+    model: "claude-sonnet-4.6",
     ms: 0,
   },
 ];

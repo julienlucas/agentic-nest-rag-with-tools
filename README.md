@@ -4,6 +4,22 @@ Port TypeScript de [agentic-rag](../agentic-rag) (Python, Django, LangGraph), su
 de production AWS : **NestJS, Vercel AI SDK v7, Amazon Bedrock, OpenSearch, Langfuse et
 OpenTelemetry**. Le frontend React est repris tel quel, avec le même contrat d'API.
 
+## Modèles utilisés
+
+| Rôle | Modèle | Accès |
+|---|---|---|
+| Générateur à outils (recherche + réponse) | **Claude Sonnet 4.6** (`eu.anthropic.claude-sonnet-4-6`) | Amazon Bedrock, Paris |
+| Vérificateur de pertinence, routeur | **Claude Haiku 4.5** (`eu.anthropic.claude-haiku-4-5-20251001-v1:0`) | Amazon Bedrock, Paris |
+| Embeddings | **Cohere Embed Multilingual v3** (`cohere.embed-multilingual-v3`) | Amazon Bedrock, Paris |
+| Reranking | **Cohere Rerank v4 Pro** (`rerank-v4.0-pro`) | API Cohere directe |
+| OCR des PDF uploadés | Mistral OCR | API Mistral |
+| Juge de l'éval | Mistral Large (`mistral-large-latest`) | API Mistral (le même juge que le projet Python) |
+
+Pourquoi le rerank ne passe pas par Bedrock : à Paris, Bedrock n'a pas de reranker (Cohere
+Rerank 3.5 n'existe qu'en `eu-central-1`), et Rerank v4 Pro est le reranker du projet Python.
+Tout se change dans le `.env` : `RERANK_PROVIDER=bedrock` avec `AWS_REGION=eu-central-1` donne
+une stack 100 % AWS.
+
 Le projet Python est mesuré sur [FinanceBench](https://github.com/patronus-ai/financebench) :
 **83,3 % de réponses correctes avec les outils, contre 65,4 % sans**, à retrieval identique.
 Ce port réutilise les mêmes pages OCR, les mêmes chunks, les mêmes prompts et le même juge. Le
@@ -18,10 +34,10 @@ supposer.
 | `pydantic-settings` | `config/settings.ts` (Zod), mêmes réglages |
 | LangGraph `StateGraph` | `agent/workflow.ts` : une séquence, la boucle est dans l'AI SDK |
 | `@tool` LangChain + `run_tool_loop` | `agent/tools.ts` : `tool()` + Zod, budget de 5 appels |
-| `ChatMistralAI` | `llm/providers.ts` : Bedrock, Mistral ou Azure OpenAI (une ligne de `.env`) |
-| Mistral Embed + Chroma | `retrieval/embedder.ts` (cache disque) + index mémoire ou **OpenSearch** |
+| `ChatMistralAI` (Mistral Large / Small) | `llm/providers.ts` : Claude Sonnet 4.6 / Haiku 4.5 via Bedrock ; Mistral ou Azure OpenAI en une ligne de `.env` |
+| Mistral Embed + Chroma | `retrieval/embedder.ts` : Cohere Embed via Bedrock (cache disque) + index mémoire ou **OpenSearch** |
 | `rank_bm25` + `EnsembleRetriever` | `retrieval/bm25.ts` (mêmes scores, testés contre Python) + `fusion.ts` (RRF) |
-| Cohere Rerank v4 (API) | `retrieval/reranker.ts` : Cohere Rerank 3.5 **via Bedrock** (ou l'API Cohere) |
+| Cohere Rerank v4 (API) | `retrieval/reranker.ts` : Rerank v4 Pro par l'API Cohere (ou Rerank 3.5 via Bedrock) |
 | `page_store.py` | `retrieval/page-store.ts` (grep, read_page) |
 | `document_router.py` | `retrieval/document-router.ts` |
 | `relevance_checker.py` | `agent/relevance-checker.ts` |
@@ -59,7 +75,7 @@ Le `Dockerfile` construit l'image complète.
 cd backend
 pnpm index:financebench                     # embeddings des ~12 400 chunks, une fois par modèle
 pnpm eval                                   # 26 questions, avec et sans outils, juge LLM
-pnpm eval --mode agentic --label bedrock-mistral-large
+pnpm eval --mode agentic --label bedrock-sonnet-4-6
 pnpm eval --max-items 3 --no-judge --out-dir /tmp/essai   # essai rapide
 ```
 
@@ -70,11 +86,14 @@ comptages bruts, les IC95, la latence et le coût.
 
 | Run | LLM | Embeddings | Rerank | Ce qu'il mesure |
 |---|---|---|---|---|
-| 0 | Mistral API | mistral-embed | Cohere API v4 | le port TS seul (mêmes modèles que Python) |
-| 1 | Mistral Large **Bedrock** | mistral-embed | Cohere API v4 | le fournisseur du LLM |
-| 2 | Mistral Large Bedrock | **Cohere Embed Bedrock** | Cohere API v4 | les embeddings |
-| 3 | Mistral Large Bedrock | Cohere Embed Bedrock | **Rerank 3.5 Bedrock** | le reranker (stack 100 % AWS) |
-| 4 | **Claude Sonnet** Bedrock | Cohere Embed Bedrock | Rerank 3.5 Bedrock | le modèle |
+| 0 | Mistral Large (API Mistral) | mistral-embed | Cohere v4 Pro | le port TS seul (mêmes modèles que Python) |
+| 1 | **Claude Sonnet 4.6** (Bedrock) | mistral-embed | Cohere v4 Pro | le changement de LLM |
+| 2 | Claude Sonnet 4.6 (Bedrock) | **Cohere Embed v3** (Bedrock) | Cohere v4 Pro | les embeddings — **configuration par défaut** |
+| 3 | Claude Sonnet 4.6 (Bedrock, `eu-central-1`) | Cohere Embed v3 (Bedrock) | **Rerank 3.5** (Bedrock) | le reranker (stack 100 % AWS) |
+
+Mistral Large n'est pas proposé dans une version récente sur Bedrock en Europe
+(`mistral-large-2402` seulement, à Paris) : le run 1 change donc le fournisseur et le modèle à
+la fois.
 
 Le juge reste le même (Mistral Large, La Plateforme) sur tous les runs.
 
