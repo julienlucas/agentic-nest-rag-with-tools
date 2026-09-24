@@ -1,0 +1,11 @@
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+.env
+**/.env
+data/*
+!data/document_cache
+eval-outputs
+.git
+.github
+**/.DS_Store

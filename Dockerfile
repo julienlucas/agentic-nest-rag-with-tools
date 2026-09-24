@@ -1,5 +1,6 @@
 # Image unique : l'API Nest sert aussi le frontend buildé (comme Django servait frontend/dist).
 FROM node:22-slim AS build
+ENV CI=true
 RUN corepack enable
 WORKDIR /app
 COPY frontend/package.json frontend/pnpm-lock.yaml frontend/
@@ -19,6 +20,7 @@ COPY --from=build /app/backend/node_modules backend/node_modules
 COPY --from=build /app/backend/package.json backend/
 COPY --from=build /app/frontend/dist frontend/dist
 COPY backend/static backend/static
-# Cache des documents d'exemple déjà OCRisés (optionnel) : COPY data/document_cache data/document_cache
+# Documents d'exemple déjà OCRisés : ils se chargent sans appel à Mistral OCR
+COPY data/document_cache data/document_cache
 EXPOSE 3000
 CMD ["node", "backend/dist/main.js"]
