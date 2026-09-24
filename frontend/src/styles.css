@@ -119,6 +119,7 @@
   --color-wine-900: var(--wine-900);
 
   --color-chart-before: var(--chart-before);
+  --color-chart-notools: var(--chart-notools);
   --color-chart-after: var(--chart-after);
   --color-chart-ref: var(--chart-ref);
 
@@ -208,6 +209,7 @@
   /* Avant / après / référence externe : une seule teinte, trois valeurs —
      rosé, bordeaux, bordeaux noir. Distinguables aussi en niveaux de gris. */
   --chart-before: var(--wine-200);
+  --chart-notools: var(--wine-300);
   --chart-after: var(--wine-500);
   --chart-ref: var(--wine-900);
 
