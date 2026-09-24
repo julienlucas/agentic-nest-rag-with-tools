@@ -23,14 +23,14 @@ const envSchema = z.object({
   // --- Modèles ------------------------------------------------------------
   // Générateur (réponse avec outils) et sous-agents (pertinence, routage).
   LLM_PROVIDER: provider.default("bedrock"),
-  MODEL_ID: z.string().default("mistral.mistral-large-2407-v1:0"),
-  MODEL_SMALL_ID: z.string().default("mistral.mistral-small-2402-v1:0"),
+  MODEL_ID: z.string().default("eu.anthropic.claude-sonnet-4-6"),
+  MODEL_SMALL_ID: z.string().default("eu.anthropic.claude-haiku-4-5-20251001-v1:0"),
 
   EMBEDDING_PROVIDER: z.enum(["bedrock", "mistral"]).default("bedrock"),
   EMBEDDING_MODEL_ID: z.string().default("cohere.embed-multilingual-v3"),
 
-  RERANK_PROVIDER: z.enum(["bedrock", "cohere", "none"]).default("bedrock"),
-  RERANK_MODEL_ID: z.string().default("cohere.rerank-v3-5:0"),
+  RERANK_PROVIDER: z.enum(["bedrock", "cohere", "none"]).default("cohere"),
+  RERANK_MODEL_ID: z.string().default("rerank-v4.0-pro"),
 
   // Juge de l'éval : doit rester CONSTANT d'un run à l'autre pour que les runs se comparent.
   // Par défaut, le même juge que le projet Python (Mistral Large via La Plateforme).
