@@ -45,30 +45,30 @@ const toolGains = [
 
 const toolsHere = [
   {
-    value: "65,4 → 83,3 %",
+    value: "80,8 → 92,3 %",
     label: "de réponses correctes",
-    detail: "même index, même retrieval, mêmes 10 passages initiaux : la seule différence, ce sont les outils",
+    detail: "même index, même retrieval, mêmes 10 passages initiaux : la seule différence, ce sont les outils (Claude Sonnet 4.6 dans les deux cas)",
   },
   {
-    value: "26,9 → 16,7 %",
+    value: "15,4 → 7,7 %",
     label: "d'hallucinations",
-    detail: "7 réponses fausses sur 26 sans outils, 4 sur 24 avec",
+    detail: "4 réponses fausses sur 26 sans outils, 2 sur 26 avec",
   },
   {
-    value: "9 sur 26",
+    value: "15 sur 26",
     label: "questions ont appelé un outil",
-    detail: "3,9 appels en moyenne, une page lue dans 8 cas sur 9 ; les 17 autres répondent en une passe, sans un token de plus",
+    detail: "2,5 appels en moyenne, une page entière lue dans 14 cas sur 15 ; les 11 autres répondent en une passe, sans un token de plus",
   },
 ];
 
 const limits = [
   {
     title: "Le recall du retrieval",
-    text: "Sur 8 questions sur 26, la page de preuve n'atteint jamais le modèle, outils compris. Quand elle l'atteint, il répond juste dans 15 cas sur 18.",
+    text: "Sur 2 questions sur 26, la page de preuve annotée n'atteint jamais le modèle, outils compris. Quand elle l'atteint, il répond juste dans 23 cas sur 24 : le retrieval redevient le premier levier.",
   },
   {
     title: "Le modèle de raisonnement est un levier à part entière",
-    text: "La version Python mesurée tournait sur Mistral Large, un modèle de raisonnement limité. Ce port utilise Claude Sonnet 4.6 sur Amazon Bedrock : l'éval FinanceBench, relancée à retrieval identique, mesure ce que ce changement rapporte.",
+    text: "La version Python tournait sur Mistral Large : 65 % sans outils, 83 % avec. Ce port utilise Claude Sonnet 4.6, appelé directement sur Amazon Bedrock : 81 % sans outils, 92 % avec. Le modèle fait l'essentiel du gain ; les outils ajoutent encore 3 questions, un écart qui n'est plus démontrable sur 26 questions.",
   }
 ];
 
