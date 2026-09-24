@@ -86,7 +86,7 @@ const levers = [
   },
   {
     title: "Génération contrainte",
-    text: "Mistral Large ne répond qu'à partir des passages retenus et refuse quand la preuve manque — sauf pour calculer un ratio dont les composantes sont sous ses yeux, formule et chiffres cités.",
+    text: "Le modèle de réponse (Claude Sonnet 4.6 sur Bedrock ; Mistral Large dans la version Python mesurée) ne répond qu'à partir des passages retenus et refuse quand la preuve manque — sauf pour calculer un ratio dont les composantes sont sous ses yeux, formule et chiffres cités.",
   },
   {
     title: "Chunking parent / enfant",
@@ -170,7 +170,7 @@ function MetricsTable() {
         répondre. Entre parenthèses, le nombre de réponses concernées.
       </p>
       <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[34rem] text-sm">
+        <table className="data-table w-full min-w-[34rem] text-sm">
           <thead>
             <tr className="text-left text-xs text-muted-foreground">
               <th className="py-2 pr-4 font-medium">Métrique</th>
@@ -186,7 +186,7 @@ function MetricsTable() {
                 </th>
               </tr>
               {g.rows.map((r) => (
-                <tr key={r.metric} className="border-t border-hairline align-top">
+                <tr key={r.metric} className="data-row border-t border-hairline align-top">
                   <td className="py-2 pr-4">
                     <span className="font-medium">{r.metric}</span>
                     {r.hint && (
@@ -263,7 +263,7 @@ function BenchmarkChart() {
       </div>
 
       {table ? (
-        <table className="mt-4 w-full text-sm">
+        <table className="data-table mt-4 w-full text-sm">
           <thead>
             <tr className="text-left text-xs text-muted-foreground">
               <th className="py-2 font-medium">Métrique</th>
@@ -275,7 +275,7 @@ function BenchmarkChart() {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.metric} className="border-t border-hairline">
+              <tr key={r.metric} className="data-row border-t border-hairline">
                 <td className="py-2 font-medium">{r.metric}</td>
                 <td className="py-2 tabular-nums">
                   {r.before.toLocaleString("fr-FR")} %

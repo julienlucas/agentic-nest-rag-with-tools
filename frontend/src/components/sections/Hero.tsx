@@ -39,7 +39,6 @@ const tooling = [
   "NestJS",
   "Vercel AI SDK",
   "Amazon Bedrock",
-  "OpenSearch",
   "RAG BM25",
   "Langfuse · OpenTelemetry",
 ];
@@ -65,7 +64,7 @@ export function Hero() {
               RAG <span className="accent-italic">agentique</span>
               <span className="display-md mt-2 block text-ink">
                 Discutez avec quantité de documents, avec citation des sources — port TypeScript / NestJS
-                sur Amazon Bedrock d'un RAG évalué à ~83 % sur un sous-ensemble de FinanceBench
+                sur Amazon Bedrock d'un RAG évalué à ~83&nbsp;% sur un sous-ensemble de FinanceBench
               </span>
             </h1>
             <p className="copy mt-6">

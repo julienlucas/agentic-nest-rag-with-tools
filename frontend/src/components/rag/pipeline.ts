@@ -26,7 +26,7 @@ export const pipelineSteps: PipelineStep[] = [
     key: "retrieve",
     label: "Recherche hybride",
     detail:
-      "BM25 (k = 20) + vecteurs (mémoire ou OpenSearch) / Cohere Embed sur Bedrock (k = 20), fusion RRF 0,5 / 0,5, puis remontée des chunks parents (1 200 car.).",
+      "BM25 (k = 20) + vecteurs Cohere Embed sur Bedrock (k = 20), fusion RRF 0,5 / 0,5, puis remontée des chunks parents (1 200 car.).",
     model: "cohere-embed · bedrock",
     ms: 1800,
   },

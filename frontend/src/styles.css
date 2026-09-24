@@ -4,9 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system — « Papier & Or »
+ * Design system — « Blanc & Bordeaux »
  *
- * Surfaces papier chaud, encre quasi noire, un seul accent : l'or bruni, en nuances.
+ * Surfaces blanches, gris neutres pour les tableaux et panneaux, encre quasi noire,
+ * un seul accent : le bordeaux, en nuances.
  * Display + corps : Geist. Mono : Geist Mono. Accents italiques : Instrument Serif.
  * Les trois familles sont servies par Google Fonts avec `display=swap` (cf. index.html),
  * doublées ici par des faces de repli metric-matched (`font-display: swap`) pour que la
@@ -110,12 +111,12 @@
   --color-on-ink: var(--on-ink);
   --color-on-ink-muted: var(--on-ink-muted);
 
-  --color-gold-100: var(--gold-100);
-  --color-gold-200: var(--gold-200);
-  --color-gold-300: var(--gold-300);
-  --color-gold-500: var(--gold-500);
-  --color-gold-700: var(--gold-700);
-  --color-gold-900: var(--gold-900);
+  --color-wine-100: var(--wine-100);
+  --color-wine-200: var(--wine-200);
+  --color-wine-300: var(--wine-300);
+  --color-wine-500: var(--wine-500);
+  --color-wine-700: var(--wine-700);
+  --color-wine-900: var(--wine-900);
 
   --color-chart-before: var(--chart-before);
   --color-chart-after: var(--chart-after);
@@ -124,7 +125,7 @@
   /* Une seule ombre réelle : celle des éléments qui flottent. Le reste est un filet. */
   --shadow-xs: none;
   --shadow-card: none;
-  --shadow-lift: 0 18px 44px -14px oklch(0.14 0.008 60 / 26%), 0 2px 6px oklch(0.14 0.008 60 / 8%);
+  --shadow-lift: 0 18px 44px -14px oklch(0.15 0 0 / 22%), 0 2px 6px oklch(0.15 0 0 / 8%);
   --shadow-brand: none;
 }
 
@@ -136,36 +137,36 @@
   --section-y: clamp(4.5rem, 9vw, 8rem);
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
 
-  /* ---- Papiers ---- */
-  --paper: #f5f1ea;
-  --paper-2: #ede8df;
-  --paper-3: #e4ded2;
-  --paper-warm: var(--gold-100);
-  --sand: #ddd6ca;
-  --sand-deep: #c3bab0;
+  /* ---- Surfaces : blanc, puis gris neutres (tableaux, panneaux, lignes alternées) ---- */
+  --paper: #ffffff;
+  --paper-2: #f6f6f7; /* gris très clair — en-têtes de tableau, panneaux */
+  --paper-3: #ececee; /* gris clair — lignes alternées, survol */
+  --paper-warm: var(--paper-2);
+  --sand: #e0e0e3; /* gris moyen — pistes de barres, séparateurs épais */
+  --sand-deep: #c4c4c9;
 
   /* ---- Encre ---- */
-  --ink: #0e0d0c;
-  --ink-soft: #181614;
-  --ink-muted: #0e0d0ca3; /* 64 % — texte secondaire, AA sur papier */
-  --ink-faint: #0e0d0c94; /* 58 % — index, légendes, unités */
-  --hairline: #0e0d0c1f; /* 12 % — séparateur par défaut */
-  --hairline-strong: #0e0d0c47; /* 28 % — bordure de contrôle */
+  --ink: #111113;
+  --ink-soft: #1c1c1f;
+  --ink-muted: #111113a3; /* 64 % — texte secondaire, AA sur blanc */
+  --ink-faint: #11111394; /* 58 % — index, légendes, unités */
+  --hairline: #1111131f; /* 12 % — séparateur par défaut */
+  --hairline-strong: #11111347; /* 28 % — bordure de contrôle */
 
-  /* ---- L'or, en nuances ----
-     Une seule teinte, déclinée du lavis à l'encre dorée. `--signal` est le rôle
-     (l'accent), `--gold-*` est la matière : on manipule le rôle, jamais la valeur. */
-  --gold-100: #f2ebd5; /* lavis — fonds de section, wash */
-  --gold-200: #e3d5a8; /* champagne — panneaux, série basse d'un graphe */
-  --gold-300: #c2a04c; /* or clair — accent posé sur l'encre */
-  --gold-500: #8d7022; /* or bruni — l'accent, aplats et barres */
-  --gold-600: #705300; /* hover d'un aplat */
-  --gold-700: #624900; /* texte accent sur papier — 7,6:1 */
-  --gold-900: #2f2a17; /* encre dorée — série haute d'un graphe */
+  /* ---- Le bordeaux, en nuances ----
+     Une seule teinte, déclinée du lavis rosé au bordeaux sombre. `--signal` est le rôle
+     (l'accent), `--wine-*` est la matière : on manipule le rôle, jamais la valeur. */
+  --wine-100: #f9eef0; /* lavis — fonds d'accent très légers */
+  --wine-200: #eccbd1; /* rosé — panneaux, série basse d'un graphe */
+  --wine-300: #cf7a8a; /* bordeaux clair — accent posé sur l'encre */
+  --wine-500: #7b1e2f; /* bordeaux — l'accent, aplats et barres (10:1 sur blanc) */
+  --wine-600: #661726; /* hover d'un aplat */
+  --wine-700: #561220; /* texte accent sur blanc */
+  --wine-900: #2d0a11; /* bordeaux noir — série haute d'un graphe */
 
-  --signal: var(--gold-500);
-  --signal-strong: var(--gold-600);
-  --signal-deep: var(--gold-700);
+  --signal: var(--wine-500);
+  --signal-strong: var(--wine-600);
+  --signal-deep: var(--wine-700);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -181,7 +182,7 @@
   --secondary-foreground: var(--ink-soft);
   --muted: var(--paper-2);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--gold-100);
+  --accent: var(--wine-100);
   --accent-foreground: var(--signal-deep);
   --destructive: #9b1c30;
   --destructive-foreground: var(--paper);
@@ -196,19 +197,19 @@
   --brand-strong: var(--signal-strong);
   --brand-deep: var(--signal-deep);
   --brand-ink: var(--ink); /* aplat sombre des boutons primaires */
-  --brand-light: var(--gold-300); /* accent posé sur l'encre */
+  --brand-light: var(--wine-300); /* accent posé sur l'encre */
   --brand-surface: color-mix(in srgb, var(--signal) 12%, transparent);
-  /* Teinte de panneau : le champagne posé sur le papier, pas une opacité d'or. */
-  --brand-surface-strong: color-mix(in srgb, var(--gold-200) 45%, var(--paper));
+  /* Teinte de panneau : le rosé posé sur le blanc, pas une opacité de bordeaux. */
+  --brand-surface-strong: color-mix(in srgb, var(--wine-200) 45%, var(--paper));
 
   --on-ink: var(--paper);
-  --on-ink-muted: #f5f1eaa8;
+  --on-ink-muted: #ffffffa8;
 
   /* Avant / après / référence externe : une seule teinte, trois valeurs —
-     champagne, or bruni, encre dorée. Distinguables aussi en niveaux de gris. */
-  --chart-before: var(--gold-200);
-  --chart-after: var(--gold-500);
-  --chart-ref: var(--gold-900);
+     rosé, bordeaux, bordeaux noir. Distinguables aussi en niveaux de gris. */
+  --chart-before: var(--wine-200);
+  --chart-after: var(--wine-500);
+  --chart-ref: var(--wine-900);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 0.18s;
@@ -243,13 +244,13 @@
   --secondary-foreground: var(--ink);
   --muted: var(--paper-2);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--gold-100);
-  --accent-foreground: var(--gold-300);
+  --accent: var(--wine-100);
+  --accent-foreground: var(--wine-300);
   --destructive: #e8697d;
   --success: #5fbf9a;
-  --warning: var(--gold-300);
+  --warning: var(--wine-300);
 
-  --brand-deep: var(--gold-300);
+  --brand-deep: var(--wine-300);
   --brand-ink: var(--signal);
   --brand-surface: color-mix(in srgb, var(--signal) 20%, transparent);
   --brand-surface-strong: color-mix(in srgb, var(--signal) 12%, var(--paper));
@@ -258,7 +259,7 @@
   --on-ink-muted: #f2ede6a8;
 
   --chart-before: #6b5a30;
-  --chart-after: var(--gold-300);
+  --chart-after: var(--wine-300);
   --chart-ref: #e6dcc0;
 }
 
@@ -292,7 +293,7 @@
   }
 
   ::selection {
-    background: var(--gold-200);
+    background: var(--wine-200);
     color: var(--ink);
   }
 
@@ -629,8 +630,8 @@
   --border: var(--hairline);
   --input: var(--hairline-strong);
   --muted-foreground: var(--on-ink-muted);
-  --brand-deep: var(--gold-300); /* l'or bruni ne tient pas sur l'encre : on éclaircit */
-  --brand-surface: color-mix(in srgb, var(--gold-300) 16%, transparent);
+  --brand-deep: var(--wine-300); /* le bordeaux ne tient pas sur l'encre : on éclaircit */
+  --brand-surface: color-mix(in srgb, var(--wine-300) 16%, transparent);
   color: var(--on-ink);
 }
 .surface-ink a:not([class]) {
@@ -638,20 +639,20 @@
   text-decoration-color: color-mix(in srgb, var(--on-ink) 40%, transparent);
 }
 .surface-ink a:not([class]):hover {
-  color: var(--gold-300);
+  color: var(--wine-300);
   text-decoration-color: currentColor;
 }
 .surface-ink ::selection {
-  background: var(--gold-300);
+  background: var(--wine-300);
   color: var(--ink-soft);
 }
 
-/* Leviers du benchmark, triés par gain : le champagne s'estompe du premier rang au
+/* Leviers du benchmark, triés par gain : le rosé s'estompe du premier rang au
    dernier. On dégrade une teinte claire vers le papier — et non l'encre vers le papier —
    pour que le texte reste en encre sur toute la série, sans zone grise illisible au milieu.
-   Seul le premier rang est marqué, par un filet d'or en bord gauche. */
+   Seul le premier rang est marqué, par un filet bordeaux en bord gauche. */
 .lever-row {
-  background: color-mix(in oklch, var(--gold-300) var(--lever-strength), var(--paper));
+  background: color-mix(in oklch, var(--wine-300) var(--lever-strength), var(--paper));
   color: var(--foreground);
   border-left: 2px solid transparent;
 }
@@ -665,8 +666,26 @@
   border-left-color: var(--signal);
 }
 .dark .lever-row {
-  background: color-mix(in oklch, var(--gold-900) var(--lever-strength), var(--paper));
+  background: color-mix(in oklch, var(--wine-900) var(--lever-strength), var(--paper));
 }
 .dark .lever-row .lever-index {
-  color: var(--gold-300);
+  color: var(--wine-300);
+}
+
+/* Tableaux de résultats : nuances de gris sur le blanc — en-tête gris clair, lignes
+   alternées à peine teintées, survol un cran plus soutenu. */
+.data-table th,
+.data-table td {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.data-table thead tr {
+  background: var(--paper-3);
+  color: var(--ink-soft);
+}
+.data-table .data-row:nth-child(even) {
+  background: var(--paper-2);
+}
+.data-table .data-row:hover {
+  background: var(--paper-3);
 }

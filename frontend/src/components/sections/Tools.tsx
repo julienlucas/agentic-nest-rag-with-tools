@@ -67,18 +67,8 @@ const limits = [
     text: "Sur 8 questions sur 26, la page de preuve n'atteint jamais le modèle, outils compris. Quand elle l'atteint, il répond juste dans 15 cas sur 18.",
   },
   {
-    title: "Le modèle de raisonnement sur les questions est faible",
-    text: (
-      <>
-        Un autre modèle de raisonnement que{" "}
-        <img
-          src="/static/mistral.png"
-          alt="Mistral AI"
-          className="inline-block h-4 w-auto align-text-bottom"
-        />{" "}
-        Ce qui est utilisé utilisé dans ce RAG agentique est Mistral Medium 3, un modèle de raisonnement limité. Pourtant un gros gain se joue ici.
-      </>
-    ),
+    title: "Le modèle de raisonnement est un levier à part entière",
+    text: "La version Python mesurée tournait sur Mistral Large, un modèle de raisonnement limité. Ce port utilise Claude Sonnet 4.6 sur Amazon Bedrock : l'éval FinanceBench, relancée à retrieval identique, mesure ce que ce changement rapporte.",
   }
 ];
 
