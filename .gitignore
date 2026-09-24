@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+coverage/
+backend/tsconfig.tsbuildinfo
+
+# Données régénérables (scripts/export_from_python.py) et caches d'embeddings
+data/
+# Sorties d'éval : versionner seulement les runs de référence (git add -f eval-outputs/<label>/summary.json)
+eval-outputs/
+*.tsbuildinfo

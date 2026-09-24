@@ -8,6 +8,24 @@ Objectif mesurable : relancer l'éval FinanceBench (26 questions, 4 10-K) et com
 **83,3 % (20/24)** du projet Python. Le score n'est pas acquis : modèle, embeddings et reranker
 changent. On isole les variables une par une (voir phase 6).
 
+## État d'avancement (24 septembre 2026)
+
+| Phase | État |
+|---|---|
+| 0. Comptes | **À faire de ton côté** (voir le tableau ci-dessous) |
+| 1. Squelette Nest + Bedrock | Fait (`pnpm smoke` ; non testé sur Bedrock faute de clés AWS valides) |
+| 2. Données exportées du Python | Fait (`scripts/export_from_python.py`) |
+| 3. Retrieval | Fait (BM25 testé contre rank_bm25, RRF, parent-child, routage, rerank) |
+| 4. Agent à outils | Fait, vérifié en réel avec Mistral (boucle d'outils, refus hors document) |
+| 5. Langfuse / OpenTelemetry | Fait (intégration AI SDK v7) ; non testé sans clés Langfuse |
+| 6. Éval + garde-fous | Fait ; runner validé sur 3 questions (stack Mistral, sans rerank) |
+| 7. OpenSearch | Adaptateur + docker-compose écrits ; non lancé |
+| 8. Vérificateur de pertinence | Fait (dans le pipeline par défaut, comme en Python) |
+| 9. Azure OpenAI | Adaptateur prêt (`LLM_PROVIDER=azure`) ; non testé |
+| 10. Ingestion serverless S3/SQS/Lambda | **Non fait** (sujet d'entretien, pas nécessaire pour la démo) |
+| 11. Tests + CI | 31 tests Vitest, workflow GitHub Actions |
+| Frontend | Repris du Python, textes de stack mis à jour, build OK |
+
 ---
 
 ## 0. Comptes et accès à créer (toi)
