@@ -61,17 +61,6 @@ const toolsHere = [
   },
 ];
 
-const limits = [
-  {
-    title: "Le recall du retrieval",
-    text: "Sur 2 questions sur 26, la page de preuve annotée n'atteint jamais le modèle, outils compris. Quand elle l'atteint, il répond juste dans 23 cas sur 24 : le retrieval redevient le premier levier.",
-  },
-  {
-    title: "Le modèle de raisonnement est un levier à part entière",
-    text: "La version Python tournait sur Mistral Large : 65 % sans outils, 83 % avec. Ce port utilise Claude Sonnet 4.6, appelé directement sur Amazon Bedrock : 81 % sans outils, 92 % avec. Le modèle fait l'essentiel du gain ; les outils ajoutent encore 3 questions, un écart qui n'est plus démontrable sur 26 questions.",
-  }
-];
-
 export function Tools() {
   return (
     <Section
@@ -140,30 +129,6 @@ export function Tools() {
             Mistral AI, Introducing Agentic Search
           </cite>
         </blockquote>
-      </div>
-
-      <div className="mt-14">
-        <div className="flex flex-col">
-          <p className="display-md mt-3">Ce qui limite encore</p>
-          <ol className="mt-6 divide-y divide-border border-t border-hairline">
-            {limits.map((l, i) => (
-              <li
-                key={l.title}
-                className="grid gap-1 py-4 sm:grid-cols-[2rem_16rem_1fr] sm:gap-4"
-              >
-                <span className="mono-xs pt-1 text-ink-faint">0{i + 1}</span>
-                <span className="text-sm font-medium">{l.title}</span>
-                <span className="text-sm leading-relaxed text-ink-muted">
-                  {l.text}
-                </span>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-4 border-t border-sand pt-3 text-xs leading-relaxed text-muted-foreground">
-            26 questions d'évaluation sur 4 filings : assez pour repérer les
-            modes d'échec, trop peu pour se comparer à un benchmark complet.
-          </p>
-        </div>
       </div>
     </Section>
   );
