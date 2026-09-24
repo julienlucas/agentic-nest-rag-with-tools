@@ -21,6 +21,7 @@
     "@ai-sdk/cohere": "^4.0.48",
     "@ai-sdk/mistral": "^4.0.50",
     "@aws-sdk/credential-providers": "^3.1139.0",
+    "@langfuse/client": "5.11.1",
     "@langfuse/otel": "^5.11.1",
     "@langfuse/tracing": "^5.11.1",
     "@langfuse/vercel-ai-sdk": "^5.11.1",

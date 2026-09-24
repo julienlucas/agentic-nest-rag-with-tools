@@ -126,6 +126,14 @@ le span du pipeline, le retrieval, chaque appel LLM (vérificateur, boucle d'out
 ses tokens et sa latence, et les appels d'outils. Les runs d'éval sont tagués `eval`,
 `financebench` et le mode.
 
+Un `pnpm eval` complet et jugé tourne comme une experiment Langfuse par mode sur le dataset
+`financebench` (onglet Experiments) : chaque question est une trace, avec les scores `correct`,
+`hallucination`, `refusal`, `faithfulness`, `page_hit@k`, `evidence_seen`, `tool_calls`,
+latences… La moyenne de `correct` par run est l'accuracy ; les IC95 sont des scores du run.
+Les deux modes partagent toujours le même retrieval par question. `--no-langfuse` revient au
+run local seul ; les runs partiels (`--max-items`, `--docs`, `--no-judge`) ne créent pas
+d'experiment.
+
 ## Écarts connus avec le Python
 
 - **Chunking des documents uploadés** : parents découpés récursivement, pas sémantiquement.
