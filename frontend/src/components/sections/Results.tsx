@@ -24,7 +24,7 @@ const levels = [
     tone: "muted" as const,
   },
   {
-    label: "Ce RAG, sans outils",
+    label: "Ce RAG, sans outils · Claude Sonnet 4.6",
     setup:
       "Même index, même retrieval, mêmes 10 passages initiaux, même modèle (Claude Sonnet 4.6) : une seule génération, sans search / grep / read_page. C'est le témoin qui mesure ce que les outils apportent.",
     correct: "80,8 %",
@@ -32,7 +32,7 @@ const levels = [
     tone: "plain" as const,
   },
   {
-    label: "Ce RAG, avec outils",
+    label: "Ce RAG, avec outils · Claude Sonnet 4.6",
     setup:
       "Modèle de raisonnement : Claude Sonnet 4.6, appelé directement sur Amazon Bedrock (Haiku 4.5 pour le vérificateur et le routeur) · embeddings Cohere sur Bedrock · reranking Cohere v4 · agent à outils search / grep / read_page · backend NestJS. La version Python, sur Mistral Large, faisait 83,3 % : l'essentiel du gain vient du modèle, puisque même sans outils on passe de 65 % à 81 %.",
     correct: "92,3 %",
@@ -40,7 +40,7 @@ const levels = [
     tone: "brand" as const,
   },
   {
-    label: "Agentic Search · Mistral",
+    label: "Agentic Search · Mistral Medium 3.5",
     setup:
       "Modèle de raisonnement : Mistral Medium 3.5 · 26,7 % en RAG one-shot sans boucle agentique, 86 % avec · boucle agentique + navigation · 150 questions sur les 368 documents (53900 pages) du benchmark complet + un benchmark de 89000 pages (OfficeQA Pro) qui sont des documents scannés",
     correct: "86 %",
@@ -407,9 +407,10 @@ export function Results() {
               l.tone === "ref" && "border-hairline bg-chart-ref/5",
             )}
           >
-            <div className="flex items-center justify-between">
-              <span className="eyebrow">{l.label}</span>
-              <span className="mono-xs text-ink-faint">0{i + 1}</span>
+            {/* Le numéro reste calé en haut à droite, même quand le libellé passe sur plusieurs lignes. */}
+            <div className="flex items-start justify-between gap-3">
+              <span className="eyebrow min-h-[3lh] min-w-0">{l.label}</span>
+              <span className="mono-xs shrink-0 leading-none text-ink-faint">0{i + 1}</span>
             </div>
             <div className="font-display mt-4 text-5xl font-normal tracking-tight whitespace-nowrap">
               {l.correct}
