@@ -342,7 +342,7 @@ export function DemoChat({ children }: { children?: ReactNode }) {
                       </span>
                     ) : null}
                     <div className="flex justify-end">
-                      <p className="flex max-w-[85%] gap-2.5 rounded-2xl bg-ink px-4 py-2.5 text-sm leading-relaxed text-on-ink">
+                      <p className="flex max-w-[85%] gap-2.5 rounded-2xl bg-sand px-4 py-2.5 text-sm leading-relaxed text-ink">
                         <Marker kind="q" />
                         <span className="min-w-0 flex-1">
                           {exampleOutput.question}
@@ -425,7 +425,7 @@ export function DemoChat({ children }: { children?: ReactNode }) {
                 {turns.map((turn) =>
                   turn.role === "user" ? (
                     <div key={turn.id} className="flex justify-end">
-                      <p className="rise-in flex max-w-[85%] gap-2.5 rounded-2xl rounded-br-sm bg-ink px-4 py-2.5 text-sm leading-relaxed text-on-ink">
+                      <p className="rise-in flex max-w-[85%] gap-2.5 rounded-2xl rounded-br-sm bg-sand px-4 py-2.5 text-sm leading-relaxed text-ink">
                         <Marker kind="q" />
                         <span className="min-w-0 flex-1">{turn.text}</span>
                       </p>
