@@ -1,6 +1,6 @@
 # RAG agentique — TypeScript, NestJS, Amazon Bedrock
 
-Port TypeScript de [agentic-rag](../agentic-rag) (Python, Django, LangGraph), sur une stack
+Port TypeScript de [agentic-rag](https://github.com/julienlucas/agentic-rag-with-tools) (Python, Django, LangGraph), sur une stack
 de production AWS : **NestJS, Vercel AI SDK v7, Amazon Bedrock, OpenSearch, Langfuse et
 OpenTelemetry**. Le frontend React est repris tel quel, avec le même contrat d'API.
 
